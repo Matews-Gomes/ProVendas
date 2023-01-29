@@ -1,0 +1,51 @@
+﻿@model ProVendas.APP.Models.FornecedorViewModel
+
+<div>
+    <h4>Endereco</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model =>  model.Endereco.Ds_Logradouro)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model =>  model.Endereco.Ds_Logradouro)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model =>  model.Endereco.Ds_Numero)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model =>  model.Endereco.Ds_Numero)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model =>  model.Endereco.Ds_Complemento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model =>  model.Endereco.Ds_Complemento)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model =>  model.Endereco.Ds_Cep)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model =>  model.Endereco.Ds_Cep)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model =>  model.Endereco.Ds_Bairro)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model =>  model.Endereco.Ds_Bairro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model =>  model.Endereco.Cidade.Ds_Cidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model =>  model.Endereco.Cidade.Ds_Cidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model =>  model.Endereco.Estado.Cd_Estado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model =>  model.Endereco.Estado.Cd_Estado)
+        </dd>
+    </dl>
+</div>
+

@@ -1,0 +1,35 @@
+﻿@model ProVendas.APP.Models.FornecedorViewModel
+
+<div>
+    <h4>Fornecedor</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ds_Fornecedor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ds_Fornecedor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoPessoa.Ds_TipoPessoa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TipoPessoa.Ds_TipoPessoa)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ds_Documento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ds_Documento)
+        </dd>       
+    </dl>
+    <partial name="_DetailsEndereco" />
+    <partial name="_DetailsContato" />
+</div>
+
+<div class="d-flex justify-content-end">
+    <a class="btn btn-secondary mx-2" asp-action="Index">
+        <i class="fa-solid fa-arrow-left"></i>
+        Voltar para lista
+    </a>
+</div>

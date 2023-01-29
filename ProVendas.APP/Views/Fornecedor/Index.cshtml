@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ProVendas.APP.Models.FornecedorViewModel>
+
+@{
+    ViewData["Title"] = "Fornecedores";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="d-flex justify-content-start my-4">
+    <a class="btn btn-primary" role="button" asp-action="Create">
+        <i class="fa-solid fa-plus"></i>
+        Novo Fornecedor
+    </a>
+</div>
+
+<table id="dataTable" class="table py-4" style="width:100%">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ds_Fornecedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoPessoa.Ds_TipoPessoa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ds_Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contato.Ds_Celular)
+            </th>
+            <th class="text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Fornecedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ds_Fornecedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoPessoa.Ds_TipoPessoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ds_Documento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contato.Ds_Celular)                                     
+            </td>
+            <td>
+                    @Html.ActionLink("", "Edit", new { id = item.Id_Fornecedor }, new{@class = "btn btn-secondary fa-solid fa-file-pen"}) |
+                    @Html.ActionLink("", "Details", new { id = item.Id_Fornecedor }, new{@class = "btn btn-success fa-solid fa-circle-info"}) |
+                    @Html.ActionLink("", "Delete", new { id = item.Id_Fornecedor }, new{@class = "btn btn-danger fa-solid fa-trash"})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

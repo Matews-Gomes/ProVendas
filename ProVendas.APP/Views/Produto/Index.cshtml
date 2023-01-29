@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ProVendas.APP.Models.ProdutoViewModel>
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="d-flex justify-content-start my-4">
+    <a class="btn btn-primary" role="button" asp-action="Create">
+        <i class="fa-solid fa-plus"></i>
+        Novo Produto
+    </a>
+</div>
+
+<table id="dataTable" class="table py-4" style="width:100%">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagemUpload)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ds_Produto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ds_Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vl_PrecoVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ds_Categoria)
+            </th>
+            <th class="text-center">Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/images/@item.Ds_Imagem" style="width: 150px; height: 100px;" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ds_Produto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ds_Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vl_PrecoVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ds_Categoria)
+                </td>
+                <td class="text-center">
+                    @Html.ActionLink("", "Edit", new { id = item.Id_Produto }, new{@class = "btn btn-secondary fa-solid fa-file-pen"}) |
+                    @Html.ActionLink("", "Details", new { id = item.Id_Produto }, new{@class = "btn btn-success fa-solid fa-circle-info"}) |
+                    @Html.ActionLink("", "Delete", new { id = item.Id_Produto }, new{@class = "btn btn-danger fa-solid fa-trash"})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

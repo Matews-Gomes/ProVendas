@@ -1,0 +1,77 @@
+﻿@model ProVendas.APP.Models.ProdutoViewModel
+
+@{
+    ViewData["Title"] = "Produto";
+}
+
+<h1>Editar @ViewData["Title"]</h1>
+
+<div class="d-flex justify-content-end">
+    <a class="btn btn-secondary" role="button" asp-action="Index">
+        <i class="fa-solid fa-arrow-left"></i>
+        Voltar para lista
+    </a>
+</div>
+
+<hr />
+<form enctype="multipart/form-data" asp-action="Edit" class="needs-validation" novalidate>
+    <div class="row g-3">
+        <div class="form-group">
+            <input asp-for="Id_Produto" type="hidden" />
+        </div>
+
+        <div class="col-12">
+            <label><strong>Imagem Atual</strong></label><br />
+            <img src="~/images/@Model.Ds_Imagem" style="width: 150px; height: 100px" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Ds_Produto" class="control-label fw-bold"></label>
+            <input asp-for="Ds_Produto" class="form-control" required />
+            <span asp-validation-for="Ds_Produto" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="ImagemUpload" class="form-label fw-bold mb-0"></label>
+            <input asp-for="ImagemUpload" class="form-control" type="file">
+            <span asp-validation-for="ImagemUpload" class="text-danger"></span>
+        </div>
+        <div class="col-md-12">
+            <label asp-for="Ds_Descricao" class="control-label fw-bold"></label>
+            <textarea asp-for="Ds_Descricao" class="form-control" required></textarea>
+            <span asp-validation-for="Ds_Descricao" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Vl_PrecoCusto" class="control-label fw-bold"></label>
+            <input asp-for="Vl_PrecoCusto" class="form-control" required />
+            <span asp-validation-for="Vl_PrecoCusto" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Vl_PrecoVenda" class="control-label fw-bold"></label>
+            <input asp-for="Vl_PrecoVenda" class="form-control" required />
+            <span asp-validation-for="Vl_PrecoVenda" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Id_Fornecedor" class="control-label fw-bold"></label>
+            <select asp-for="Id_Fornecedor" class="form-select"
+                    asp-items="@(new SelectList(ViewBag.fornecedores, "Id_Fornecedor","Ds_Fornecedor"))" required>
+                <option value="">Selecione...</option>
+            </select>
+            <span asp-validation-for="Id_Fornecedor" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Id_Categoria" class="control-label fw-bold"></label>
+            <select asp-for="Id_Categoria" class="form-select"
+                    asp-items="@(new SelectList(ViewBag.categorias, "Id_Categoria", "Ds_Categoria"))" required>
+                <option value="">Selecione...</option>
+            </select>
+            <span asp-validation-for="Id_Categoria" class="text-danger"></span>
+        </div>
+        <button class="w-100 btn btn-success btn-lg" type="submit" value="Save">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Salvar
+        </button>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

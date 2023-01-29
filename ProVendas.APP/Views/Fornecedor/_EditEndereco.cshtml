@@ -1,0 +1,53 @@
+﻿@model ProVendas.APP.Models.FornecedorViewModel
+
+<h4>Endereco</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">              
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label asp-for="Endereco.Ds_Logradouro" class="control-label fw-bold"></label>
+                <input asp-for="Endereco.Ds_Logradouro" class="form-control" required />
+                <span asp-validation-for="Endereco.Ds_Logradouro" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Endereco.Ds_Numero" class="control-label fw-bold"></label>
+                <input asp-for="Endereco.Ds_Numero" class="form-control" required />
+                <span asp-validation-for="Endereco.Ds_Numero" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="Endereco.Ds_Cep" class="control-label fw-bold"></label>
+                <input asp-for="Endereco.Ds_Cep" class="form-control" required />
+                <span asp-validation-for="Endereco.Ds_Cep" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Endereco.Ds_Bairro" class="control-label fw-bold"></label>
+                <input asp-for="Endereco.Ds_Bairro" class="form-control" required />
+                <span asp-validation-for="Endereco.Ds_Bairro" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="Endereco.Cidade.Id_Cidade" class="control-label fw-bold"></label>
+                <select asp-for="Endereco.Cidade.Id_Cidade" class="form-select"
+                        asp-items="@(new SelectList(ViewBag.cidades, "Id_Cidade","Ds_Cidade"))" required>
+                    <option value="">Selecione...</option>
+                </select>
+                <span asp-validation-for="Endereco.Cidade.Id_Cidade" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Endereco.Estado.Id_Estado" class="control-label fw-bold"></label>
+                <select asp-for="Endereco.Estado.Id_Estado" class="form-select"
+                        asp-items="@(new SelectList(ViewBag.estados, "Id_Estado","Ds_Estado"))" required>
+                    <option value="">Selecione...</option>
+                </select>
+                <span asp-validation-for="Endereco.Estado.Id_Estado" class="text-danger"></span>
+            </div>
+            <div class="col-md-12">
+                <label asp-for="Endereco.Ds_Complemento" class="control-label fw-bold"></label>
+                <textarea asp-for="Endereco.Ds_Complemento" class="form-control"></textarea>
+                <span asp-validation-for="Endereco.Ds_Complemento" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>
