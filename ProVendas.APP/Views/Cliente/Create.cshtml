@@ -1,10 +1,13 @@
-﻿@model ProVendas.APP.Models.FornecedorViewModel
+﻿@model ProVendas.APP.Models.ClienteViewModel
 
 @{
-    ViewData["Title"] = "Fornecedor";
+    ViewData["Title"] = "Cliente";
 }
 
-<h4>Cadastrar @ViewData["Title"]</h4>
+<h4 class="py-4">
+    <i class="fa-solid fa-user-plus"></i>
+    Cadastrar @ViewData["Title"]
+</h4>
 
 <div class="d-flex justify-content-end">
     <a class="btn btn-secondary" role="button" asp-action="Index">
@@ -16,14 +19,14 @@
 <hr />
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="Create" class="needs-validation" novalidate> 
+        <form asp-action="Create" class="needs-validation" novalidate>
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label asp-for="Ds_Fornecedor" class="control-label fw-bold"></label>
-                    <input asp-for="Ds_Fornecedor" class="form-control" required />
-                    <span asp-validation-for="Ds_Fornecedor" class="text-danger"></span>
+                    <label asp-for="Ds_Cliente" class="control-label fw-bold"></label>
+                    <input asp-for="Ds_Cliente" class="form-control" required/>
+                    <span asp-validation-for="Ds_Cliente" class="text-danger"></span>
                 </div>
-
+                
                 <div class="col-md-6">
                     <label asp-for="TipoPessoa.Id_TipoPessoa" class="control-label fw-bold"></label>
                     <select asp-for="TipoPessoa.Id_TipoPessoa" class="form-select"
@@ -33,24 +36,30 @@
                     <span asp-validation-for="TipoPessoa.Id_TipoPessoa" class="text-danger"></span>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <label asp-for="PessoaDocumento.Ds_Documento" class="control-label fw-bold"></label>
                     <input asp-for="PessoaDocumento.Ds_Documento" class="form-control" required />
                     <span asp-validation-for="PessoaDocumento.Ds_Documento" class="text-danger"></span>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <label asp-for="PessoaDocumento.Ds_InscricaoEstadual" class="control-label fw-bold"></label>
                     <input asp-for="PessoaDocumento.Ds_InscricaoEstadual" class="form-control" required />
                     <span asp-validation-for="PessoaDocumento.Ds_InscricaoEstadual" class="text-danger"></span>
                 </div>
 
-                <div class="col-md-12 py-4">
-                    <input type="checkbox" class="form-check-input" asp-for="Tp_Cliente" value="true">
-                    <label asp-for="Tp_Cliente" class="form-labe fw-bold"></label>
+                <div class="col-md-3">
+                    <label asp-for="Vl_Limite" class="control-label fw-bold"></label>
+                    <input asp-for="Vl_Limite" value="" class="form-control" required/>
+                    <span asp-validation-for="Vl_Limite" class="text-danger"></span>
                 </div>
 
-                <div class=""form-group"">
+                <div class="col-md-3 py-4">
+                    <input type="checkbox" class="form-check-input" asp-for="Tp_Fornecedor" value="true">
+                    <label asp-for="Tp_Fornecedor" class="form-labe fw-bold"></label>
+                </div>
+
+                 <div class=""form-group"">
                     <partial name="_CreateEndereco" />
                 </div>
 

@@ -1,53 +1,64 @@
-﻿@model ProVendas.APP.Models.FornecedorViewModel
+﻿@model ProVendas.APP.Models.ClienteViewModel
 
 @{
     ViewData["Title"] = "Informações";
 }
 
 <div>
+
     <h4 class="py-4">
         <i class="fa-solid fa-circle-info"></i>
-        @ViewData["Title"] do Fornecedor
+        @ViewData["Title"] do Cliente
     </h4>
-
 
     <hr />
     <dl class="row">
 
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ds_Fornecedor)
+            @Html.DisplayNameFor(model => model.Ds_Cliente)
         </dt>
 
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ds_Fornecedor)
+            @Html.DisplayFor(model => model.Ds_Cliente)
         </dd>
 
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vl_Limite)
+        </dt>
+
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vl_Limite)
+        </dd>
+
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TipoPessoa.Ds_TipoPessoa)
         </dt>
 
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TipoPessoa.Ds_TipoPessoa)
         </dd>
 
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PessoaDocumento.Ds_Documento)
         </dt>
 
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PessoaDocumento.Ds_Documento)
-        </dd> 
-        
+        </dd>
+
         <dt class="col-sm-2">
-            Cliente
+            Fornecedor
         </dt>
 
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tp_Cliente)
+            @Html.DisplayFor(model => model.Tp_Fornecedor)
         </dd>
     </dl>
+
     <partial name="_DetailsEndereco" />
+
     <partial name="_DetailsContato" />
+
 </div>
 
 <div class="d-flex justify-content-end">

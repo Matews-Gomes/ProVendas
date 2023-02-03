@@ -5,30 +5,29 @@ using System.Text;
 
 namespace ProVendas.APP.Controllers
 {
-    public class FornecedorController : Controller
+    public class ClienteController : Controller
     {
         readonly Uri baseUrl = new("https://localhost:7116/api");
         readonly HttpClient client;
 
-        public FornecedorController()
+        public ClienteController()
         {
             client = new HttpClient
             {
                 BaseAddress = baseUrl
-            };            
+            };
         }
-
         public IActionResult Index()
         {
-            List<FornecedorViewModel> fornecedores = new();
+            List<ClienteViewModel> clientes = new();
             try
             {
-                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Fornecedor").Result;
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Cliente").Result;
 
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    fornecedores = JsonConvert.DeserializeObject<List<FornecedorViewModel>>(data);
+                    clientes = JsonConvert.DeserializeObject<List<ClienteViewModel>>(data);
                 }
             }
             catch (Exception ex)
@@ -37,20 +36,19 @@ namespace ProVendas.APP.Controllers
                         $"Erro ao tentar recuperar registros. error: {ex.Message}");
             }
 
-            return View(fornecedores);
-
+            return View(clientes);
         }
 
         public IActionResult Details(int id)
         {
-            FornecedorViewModel fornecedor = new();
+            ClienteViewModel clienteById = new();
             try
             {
-                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Fornecedor/" + id).Result;
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Cliente/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    fornecedor = JsonConvert.DeserializeObject<FornecedorViewModel>(data);
+                    clienteById = JsonConvert.DeserializeObject<ClienteViewModel>(data);
                 }
             }
             catch (Exception ex)
@@ -58,28 +56,27 @@ namespace ProVendas.APP.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                         $"Erro ao tentar recuperar registros. error: {ex.Message}");
             }
-
-            return View(fornecedor);
+            return View(clienteById);
         }
 
-        public ActionResult Create()
+        public IActionResult Create()
         {
             var ListTipoPessoa = ObterTipoPessoa();
             ViewBag.tipoPessoa = ListTipoPessoa;
             var ListCidades = ObterCidades();
             ViewBag.cidades = ListCidades;
-            return View(new FornecedorViewModel());
+            return View(new ClienteViewModel());
         }
 
         [HttpPost]
-        public IActionResult Create(FornecedorViewModel entity)
+        public IActionResult Create(ClienteViewModel entity)
         {
             try
             {
                 string data = JsonConvert.SerializeObject(entity);
                 StringContent stringContent = new(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Fornecedor", stringContent).Result;
-                if(response.IsSuccessStatusCode) return RedirectToAction(nameof(Index));               
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Cliente", stringContent).Result;
+                if (response.IsSuccessStatusCode) return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
@@ -97,35 +94,33 @@ namespace ProVendas.APP.Controllers
             var ListCidades = ObterCidades();
             ViewBag.cidades = ListCidades;
 
-            FornecedorViewModel fornecedor = new();
+            ClienteViewModel clienteById = new();
 
             try
             {
-                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Fornecedor/" + id).Result;
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Cliente/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    fornecedor = JsonConvert.DeserializeObject<FornecedorViewModel>(data);
+                    clienteById = JsonConvert.DeserializeObject<ClienteViewModel>(data);
                 }
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                        $"Erro ao tentar recuperar registro. error: {ex.Message}");
+                        $"Erro ao tentar recuperar registros. error: {ex.Message}");
             }
-
-
-            return View(fornecedor);
+            return View(clienteById);
         }
 
         [HttpPost]
-        public IActionResult Edit(FornecedorViewModel entity)
+        public IActionResult Edit(int id, ClienteViewModel entity)
         {
             try
             {
                 string data = JsonConvert.SerializeObject(entity);
                 StringContent stringContent = new(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/Fornecedor/" + entity.Id_Fornecedor, stringContent).Result;
+                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/Cliente/" + entity.Id_Cliente, stringContent).Result;
 
                 if (response.IsSuccessStatusCode) return RedirectToAction(nameof(Index));
             }
@@ -145,35 +140,33 @@ namespace ProVendas.APP.Controllers
             var ListCidades = ObterCidades();
             ViewBag.cidades = ListCidades;
 
-            FornecedorViewModel fornecedor = new();
+            ClienteViewModel clienteById = new();
 
             try
             {
-                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Fornecedor/" + id).Result;
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Cliente/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    fornecedor = JsonConvert.DeserializeObject<FornecedorViewModel>(data);
+                    clienteById = JsonConvert.DeserializeObject<ClienteViewModel>(data);
                 }
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                        $"Erro ao tentar recuperar registro. error: {ex.Message}");
+                        $"Erro ao tentar recuperar registros. error: {ex.Message}");
             }
-
-
-            return View(fornecedor);
+            return View(clienteById);
         }
 
         [HttpPost]
-        public IActionResult Delete(int id, FornecedorViewModel entity)
+        public ActionResult Delete(int id, ClienteViewModel entity)
         {
             try
-            {                
+            {
                 string data = JsonConvert.SerializeObject(entity);
                 StringContent stringContent = new(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + "/Fornecedor/" + id).Result;
+                HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + "/Cliente/" + id).Result;
                 if (response.IsSuccessStatusCode) return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -184,6 +177,7 @@ namespace ProVendas.APP.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
 
         private IEnumerable<TipoPessoaViewModel> ObterTipoPessoa()
         {
@@ -226,26 +220,5 @@ namespace ProVendas.APP.Controllers
 
             return cidades;
         }
-
-        /*private IEnumerable<EstadoViewModel> ObterEstados()
-        {
-            List<EstadoViewModel> estados = new();
-
-            try
-            {
-                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Estado").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(data);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erro ao tentar recuperar registro. error: {ex.Message}");
-            }
-
-            return estados;
-        }*/
     }
 }

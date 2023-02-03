@@ -4,7 +4,10 @@
     ViewData["Title"] = "Fornecedores";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="py-4">
+    <i class="fa-solid fa-truck"></i>
+    @ViewData["Title"]
+</h1>
 
 <div class="d-flex justify-content-start my-4">
     <a class="btn btn-primary" role="button" asp-action="Create">
@@ -13,12 +16,9 @@
     </a>
 </div>
 
-<table id="dataTable" class="table py-4" style="width:100%">
+<table id="dataTable" class="table table-striped table-bordered nowrap py-4" style="width:100%">
     <thead class="table-dark">
         <tr>
-            <th>
-                #
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ds_Fornecedor)
             </th>
@@ -26,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.TipoPessoa.Ds_TipoPessoa)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ds_Documento)
+                @Html.DisplayNameFor(model => model.PessoaDocumento.Ds_Documento)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Contato.Ds_Celular)
@@ -38,16 +38,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id_Fornecedor)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Ds_Fornecedor)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TipoPessoa.Ds_TipoPessoa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ds_Documento)
+                @Html.DisplayFor(modelItem => item.PessoaDocumento.Ds_Documento)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Contato.Ds_Celular)                                     

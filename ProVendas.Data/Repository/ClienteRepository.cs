@@ -1,54 +1,55 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ProVendas.Domain.IRepository;
 using ProVendas.Domain.Models;
 
 namespace ProVendas.Data.Repository
 {
-    public class FornecedorRepository : IFornecedorRepository
+    public class ClienteRepository : IClienteRepository
     {
         public string Connection { get; set; }
         public IConfiguration _configuration;
 
-        public FornecedorRepository(IConfiguration configuration)
+        public ClienteRepository(IConfiguration configuration)
         {
             _configuration = configuration;
             Connection = _configuration.GetConnectionString("DefaultConnection");
         }
 
-        public async Task<IEnumerable<FornecedorModel>> GetAllAsync()
+        public async Task<IEnumerable<ClienteModel>> GetAllAsync()
         {
-            List<FornecedorModel> fornecedores = new();
+            List<ClienteModel> clientes = new();
 
             using SqlConnection conn = new(Connection);
             conn.Open();
 
             try
             {
-                SqlCommand cmd = new("SELECT * FROM VW_FORNECEDOR", conn)
+                SqlCommand cmd = new("SELECT * FROM VW_CLIENTE", conn)
                 {
                     CommandType = System.Data.CommandType.Text,
                 };
-
                 var reader = await cmd.ExecuteReaderAsync();
                 while (reader.Read())
                 {
-                    fornecedores.Add(new FornecedorModel()
+                    clientes.Add(new ClienteModel()
                     {
                         TipoPessoa = new TipoPessoaModel()
                         {
                             Ds_TipoPessoa = reader["Ds_TipoPessoa"].ToString().ToUpper()
                         },
 
-                        Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),
-                        Ds_Fornecedor = reader["Ds_Fornecedor"].ToString().ToUpper(),
+                        Id_Cliente = Convert.ToInt32(reader["Id_Cliente"]),
+                        Ds_Cliente = reader["Ds_Cliente"].ToString().ToUpper(),
+                        Vl_limite = Convert.ToDecimal(reader["Vl_limite"]),
 
                         PessoaDocumento = new PessoaModel()
                         {
                             Ds_Documento = reader["Ds_Documento"].ToString(),
                             Ds_InscricaoEstadual = reader["Ds_InscricaoEstadual"].ToString()
                         },
-                                               
+
                         Contato = new ContatoModel()
                         {
                             Ds_Celular = reader["Ds_Celular"].ToString(),
@@ -56,10 +57,8 @@ namespace ProVendas.Data.Repository
                         }
                     });
                 }
-
-                return fornecedores;
+                return clientes;
             }
-
             catch (Exception ex)
             {
                 throw new Exception($"Erro ao tentar recuperar registros: " + ex.Message);
@@ -68,19 +67,18 @@ namespace ProVendas.Data.Repository
             {
                 conn.Close();
             }
-            
         }
-        public async Task<FornecedorModel> GetByIdAsync(int id)
+
+        public async Task<ClienteModel> GetByIdAsync(int id)
         {
-            FornecedorModel fornecedorById = new();
+            ClienteModel clienteById = new();
 
             using SqlConnection conn = new(Connection);
             conn.Open();
 
             try
             {
-
-                SqlCommand cmd = new("SELECT * FROM VW_FORNECEDOR WHERE ID_FORNECEDOR = " + id, conn)
+                SqlCommand cmd = new("SELECT * FROM VW_CLIENTE WHERE ID_CLIENTE = " + id, conn)
                 {
                     CommandType = System.Data.CommandType.Text,
                 };
@@ -88,18 +86,18 @@ namespace ProVendas.Data.Repository
                 var reader = await cmd.ExecuteReaderAsync();
                 while (reader.Read())
                 {
-                    FornecedorModel fornecedor = new()
+                    ClienteModel cliente = new()
                     {
-
                         TipoPessoa = new TipoPessoaModel()
                         {
                             Id_TipoPessoa = Convert.ToInt32(reader["Id_TipoPessoa"]),
                             Ds_TipoPessoa = reader["Ds_TipoPessoa"].ToString().ToUpper()
                         },
 
-                        Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),
-                        Ds_Fornecedor = reader["Ds_Fornecedor"].ToString().ToUpper(),
-                        Tp_Cliente = Convert.ToBoolean(reader["Tp_Cliente"]),
+                        Id_Cliente = Convert.ToInt32(reader["Id_Cliente"]),
+                        Ds_Cliente = reader["Ds_Cliente"].ToString().ToUpper(),
+                        Vl_limite = Convert.ToDecimal(reader["Vl_limite"]),
+                        Tp_Fornecedor = Convert.ToBoolean(reader["Tp_Fornecedor"]),
 
                         PessoaDocumento = new PessoaModel()
                         {
@@ -119,7 +117,6 @@ namespace ProVendas.Data.Repository
                                 Id_Cidade = Convert.ToInt32(reader["Id_Cidade"]),
                                 Ds_Cidade = reader["Ds_Cidade"].ToString().ToUpper()
                             },
-
                             Estado = new EstadoModel()
                             {
                                 Id_Estado = Convert.ToInt32(reader["Id_Estado"]),
@@ -133,14 +130,14 @@ namespace ProVendas.Data.Repository
                             Ds_Celular = reader["Ds_Celular"].ToString(),
                             Ds_Telefone = reader["Ds_Telefone"].ToString(),
                             Ds_Email = reader["Ds_Email"].ToString(),
-                            Ds_Site = reader["Ds_Site"].ToString()
+                            Ds_Site = reader["Ds_Site"].ToString(),
                         }
                     };
 
-                    fornecedorById = fornecedor;
+                    clienteById = cliente;
                 }
 
-                return fornecedorById;
+                return clienteById;
             }
             catch (Exception ex)
             {
@@ -151,23 +148,24 @@ namespace ProVendas.Data.Repository
                 conn.Close();
             }
         }
-
-        public async Task AddAsync(FornecedorModel entity)
+        public async Task AddAsync(ClienteModel entity)
         {
-            using SqlConnection conn = new(Connection); 
+
+            using SqlConnection conn = new(Connection);
             conn.Open();
 
             try
             {
-                SqlCommand cmd = new("SP_FORNECEDOR_INS", conn)
+                SqlCommand cmd = new("SP_CLIENTE_INS", conn)
                 {
                     CommandType = System.Data.CommandType.StoredProcedure,
                 };
 
-                cmd.Parameters.AddWithValue("@Ds_Fornecedor", entity.Ds_Fornecedor);
+                cmd.Parameters.AddWithValue("@Ds_Cliente", entity.Ds_Cliente);
                 cmd.Parameters.AddWithValue("@Ds_Documento", entity.PessoaDocumento.Ds_Documento);
                 cmd.Parameters.AddWithValue("@Ds_InscricaoEstadual", entity.PessoaDocumento.Ds_InscricaoEstadual);
-                cmd.Parameters.AddWithValue("@Tp_Cliente", entity.Tp_Cliente);
+                cmd.Parameters.AddWithValue("@Vl_Limite", entity.Vl_limite);
+                cmd.Parameters.AddWithValue("@Tp_Fornecedor", entity.Tp_Fornecedor);
                 cmd.Parameters.AddWithValue("@Id_TipoPessoa", entity.TipoPessoa.Id_TipoPessoa);
                 cmd.Parameters.AddWithValue("@Ds_Logradouro", entity.Endereco.Ds_Logradouro);
                 cmd.Parameters.AddWithValue("@Ds_Numero", entity.Endereco.Ds_Numero);
@@ -192,23 +190,24 @@ namespace ProVendas.Data.Repository
             }
         }
 
-        public async Task UpdateAsync(FornecedorModel entity)
+        public async Task UpdateAsync(ClienteModel entity)
         {
             using SqlConnection conn = new(Connection);
             conn.Open();
 
             try
             {
-                SqlCommand cmd = new("SP_FORNECEDOR_UPD", conn)
+                SqlCommand cmd = new("SP_CLIENTE_UPD", conn)
                 {
                     CommandType = System.Data.CommandType.StoredProcedure,
                 };
 
-                cmd.Parameters.AddWithValue("@Id_Pessoa", entity.Id_Fornecedor);
-                cmd.Parameters.AddWithValue("@Ds_Fornecedor", entity.Ds_Fornecedor);
+                cmd.Parameters.AddWithValue("@Id_Pessoa", entity.Id_Cliente);
+                cmd.Parameters.AddWithValue("@Ds_Cliente", entity.Ds_Cliente);
                 cmd.Parameters.AddWithValue("@Ds_Documento", entity.PessoaDocumento.Ds_Documento);
+                cmd.Parameters.AddWithValue("@Vl_Limite", entity.Vl_limite);
+                cmd.Parameters.AddWithValue("@Tp_Fornecedor", entity.Tp_Fornecedor);
                 cmd.Parameters.AddWithValue("@Ds_InscricaoEstadual", entity.PessoaDocumento.Ds_InscricaoEstadual);
-                cmd.Parameters.AddWithValue("@Tp_Cliente", entity.Tp_Cliente);
                 cmd.Parameters.AddWithValue("@Id_TipoPessoa", entity.TipoPessoa.Id_TipoPessoa);
                 cmd.Parameters.AddWithValue("@Ds_Logradouro", entity.Endereco.Ds_Logradouro);
                 cmd.Parameters.AddWithValue("@Ds_Numero", entity.Endereco.Ds_Numero);
@@ -240,7 +239,7 @@ namespace ProVendas.Data.Repository
 
             try
             {
-                SqlCommand cmd = new("SP_FORNECEDOR_DEL", conn)
+                SqlCommand cmd = new("SP_CLIENTE_DEL", conn)
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
@@ -259,5 +258,6 @@ namespace ProVendas.Data.Repository
                 conn.Close();
             }
         }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@model ProVendas.APP.Models.FornecedorViewModel
+﻿@model ProVendas.APP.Models.ClienteViewModel
 
 <h4>Endereco</h4>
 <hr />
@@ -17,18 +17,17 @@
             </div>
 
             <div class="col-md-4">
+                <label asp-for="Endereco.Ds_Cep" class="control-label fw-bold"></label>
+                <input asp-for="Endereco.Ds_Cep" class="form-control" required />
+                <span asp-validation-for="Endereco.Ds_Cep" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
                 <label asp-for="Endereco.Ds_Bairro" class="control-label fw-bold"></label>
                 <input asp-for="Endereco.Ds_Bairro" class="form-control" required />
                 <span asp-validation-for="Endereco.Ds_Bairro" class="text-danger"></span>
             </div>
 
-            <div class="col-md-6">
-                <label asp-for="Endereco.Ds_Cep" class="control-label fw-bold"></label>
-                <input asp-for="Endereco.Ds_Cep" class="form-control" required />
-                <span asp-validation-for="Endereco.Ds_Cep" class="text-danger"></span>
-            </div>
-
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label asp-for="Endereco.Cidade.Id_Cidade" class="control-label fw-bold"></label>
                 <select asp-for="Endereco.Cidade.Id_Cidade" class="form-select"
                         asp-items="@(new SelectList(ViewBag.cidades, "Id_Cidade","Ds_Cidade"))" required>

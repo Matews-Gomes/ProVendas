@@ -39,31 +39,39 @@
             <textarea asp-for="Ds_Descricao" class="form-control" required></textarea>
             <span asp-validation-for="Ds_Descricao" class="text-danger"></span>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label asp-for="Vl_PrecoCusto" class="control-label fw-bold"></label>
             <input asp-for="Vl_PrecoCusto" class="form-control" required />
             <span asp-validation-for="Vl_PrecoCusto" class="text-danger"></span>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label asp-for="Vl_PrecoVenda" class="control-label fw-bold"></label>
             <input asp-for="Vl_PrecoVenda" class="form-control" required />
             <span asp-validation-for="Vl_PrecoVenda" class="text-danger"></span>
         </div>
+
+        <div class="col-md-4">
+            <label asp-for="Qt_Quantidade" class="control-label fw-bold"></label>
+            <input asp-for="Qt_Quantidade" value="" class="form-control" required />
+            <span asp-validation-for="Qt_Quantidade" class="text-danger"></span>
+        </div>
+
         <div class="col-md-6">
-            <label asp-for="Id_Fornecedor" class="control-label fw-bold"></label>
-            <select asp-for="Id_Fornecedor" class="form-select"
+            <label asp-for="Fornecedor.Id_Fornecedor" class="control-label fw-bold"></label>
+            <label asp-for="Fornecedor.Id_Fornecedor" class="control-label fw-bold"></label>
+            <select asp-for="Fornecedor.Id_Fornecedor" class="form-select"
                     asp-items="@(new SelectList(ViewBag.fornecedores, "Id_Fornecedor","Ds_Fornecedor"))" required>
                 <option value="">Selecione...</option>
             </select>
-            <span asp-validation-for="Id_Fornecedor" class="text-danger"></span>
+            <span asp-validation-for="Fornecedor.Id_Fornecedor" class="text-danger"></span>
         </div>
         <div class="col-md-6">
-            <label asp-for="Id_Categoria" class="control-label fw-bold"></label>
-            <select asp-for="Id_Categoria" class="form-select"
+            <label asp-for="Categoria.Id_Categoria" class="control-label fw-bold"></label>
+            <select asp-for="Categoria.Id_Categoria" class="form-select"
                     asp-items="@(new SelectList(ViewBag.categorias, "Id_Categoria", "Ds_Categoria"))" required>
                 <option value="">Selecione...</option>
             </select>
-            <span asp-validation-for="Id_Categoria" class="text-danger"></span>
+            <span asp-validation-for="Categoria.Id_Categoria" class="text-danger"></span>
         </div>
         <button class="w-100 btn btn-success btn-lg" type="submit" value="Save">
             <i class="fa-solid fa-floppy-disk"></i>

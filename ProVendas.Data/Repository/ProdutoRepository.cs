@@ -41,10 +41,16 @@ namespace ProVendas.Data.Repository
                         Ds_Imagem = reader["Ds_Imagem"].ToString().ToUpper(),                                                                      
                         Vl_PrecoCusto = Convert.ToDecimal(reader["Vl_PrecoCusto"]),
                         Vl_PrecoVenda = Convert.ToDecimal(reader["Vl_PrecoVenda"]),
-                        Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),
-                        Ds_Fornecedor = reader["Ds_Fornecedor"].ToString().ToUpper(),
-                        Id_Categoria = Convert.ToInt32(reader["Id_Categoria"]),
-                        Ds_Categoria = reader["Ds_Categoria"].ToString().ToUpper()
+                        Fornecedor = new FornecedorModel()
+                        {
+                            Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),
+                            Ds_Fornecedor = reader["Ds_Fornecedor"].ToString().ToUpper()
+                        },
+                        Categoria = new CategoriaModel()
+                        {
+                            Id_Categoria = Convert.ToInt32(reader["Id_Categoria"]),
+                            Ds_Categoria = reader["Ds_Categoria"].ToString().ToUpper()
+                        }                       
                     });
                 }
 
@@ -85,10 +91,16 @@ namespace ProVendas.Data.Repository
                         Ds_Imagem = reader["Ds_Imagem"].ToString().ToUpper(),
                         Vl_PrecoCusto = Convert.ToDecimal(reader["Vl_PrecoCusto"]),
                         Vl_PrecoVenda = Convert.ToDecimal(reader["Vl_PrecoVenda"]),
-                        Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),
-                        Ds_Fornecedor = reader["Ds_Fornecedor"].ToString().ToUpper(),
-                        Id_Categoria = Convert.ToInt32(reader["Id_Categoria"]),
-                        Ds_Categoria = reader["Ds_Categoria"].ToString().ToUpper()
+                        Fornecedor = new FornecedorModel()
+                        {
+                            Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),
+                            Ds_Fornecedor = reader["Ds_Fornecedor"].ToString().ToUpper()
+                        },
+                        Categoria = new CategoriaModel()
+                        {
+                            Id_Categoria = Convert.ToInt32(reader["Id_Categoria"]),
+                            Ds_Categoria = reader["Ds_Categoria"].ToString().ToUpper()
+                        }
                     };
 
                     produtoById = produto;
@@ -124,8 +136,8 @@ namespace ProVendas.Data.Repository
                 cmd.Parameters.AddWithValue("@Ds_Imagem", entity.Ds_Imagem);
                 cmd.Parameters.AddWithValue("@Vl_PrecoCusto", entity.Vl_PrecoCusto);
                 cmd.Parameters.AddWithValue("@Vl_PrecoVenda", entity.Vl_PrecoVenda);
-                cmd.Parameters.AddWithValue("@Id_Fornecedor", entity.Id_Fornecedor);
-                cmd.Parameters.AddWithValue("@Id_Categoria", entity.Id_Categoria);
+                cmd.Parameters.AddWithValue("@Id_Fornecedor", entity.Fornecedor.Id_Fornecedor);
+                cmd.Parameters.AddWithValue("@Id_Categoria", entity.Categoria.Id_Categoria);
 
                 await cmd.ExecuteNonQueryAsync();
             }
@@ -157,8 +169,8 @@ namespace ProVendas.Data.Repository
                 cmd.Parameters.AddWithValue("@Ds_Imagem", entity.Ds_Imagem);
                 cmd.Parameters.AddWithValue("@Vl_PrecoCusto", entity.Vl_PrecoCusto);
                 cmd.Parameters.AddWithValue("@Vl_PrecoVenda", entity.Vl_PrecoVenda);
-                cmd.Parameters.AddWithValue("@Id_Fornecedor", entity.Id_Fornecedor);
-                cmd.Parameters.AddWithValue("@Id_Categoria", entity.Id_Categoria);
+                cmd.Parameters.AddWithValue("@Id_Fornecedor", entity.Fornecedor.Id_Fornecedor);
+                cmd.Parameters.AddWithValue("@Id_Categoria", entity.Categoria.Id_Categoria);
 
                 await cmd.ExecuteNonQueryAsync();
             }

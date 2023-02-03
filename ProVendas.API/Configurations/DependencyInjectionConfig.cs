@@ -14,6 +14,7 @@ namespace ProVendas.API.Configurations
             services.AddScoped<ITipoPessoaRepository, TipoPessoaRepository>();
             services.AddScoped<ICidadeRepository, CidadeRepository>();
             services.AddScoped<IEstadoRepository, EstadoRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
 
             return services;
         }

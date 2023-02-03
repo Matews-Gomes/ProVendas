@@ -8,11 +8,13 @@ namespace ProVendas.APP.Models
         public int Id_Contato { get; set; }
 
         [DisplayName("Telefone")]
+        [StringLength(14, ErrorMessage = "O campo {0} aceita no máximo até {1} caracteres")]
         public string Ds_Telefone { get; set; }
 
         [DisplayName("Celular")]
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "O Campo {0}, é Obrigatório!")]
+        [StringLength(15, ErrorMessage = "O campo {0} aceita no máximo até {1} caracteres")]
         public string Ds_Celular { get; set; }
 
         [DisplayName("Email")]
