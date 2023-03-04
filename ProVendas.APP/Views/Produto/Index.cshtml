@@ -4,7 +4,7 @@
     ViewData["Title"] = "Produtos";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1><i class="fa-brands fa-product-hunt"></i> @ViewData["Title"]</h1>
 
 <div class="d-flex justify-content-start my-4">
     <a class="btn btn-primary" role="button" asp-action="Create">
@@ -48,22 +48,22 @@
                 <td>
                     <img src="~/images/@item.Ds_Imagem" style="width: 150px; height: 100px;" />
                 </td>
-                <td>
+                <td class="py-5">
                     @Html.DisplayFor(modelItem => item.Ds_Produto)
                 </td>
-                <td>
+                <td class="py-5">
                     @Html.DisplayFor(modelItem => item.Ds_Descricao)
                 </td>
-                <td>
+                <td class="py-5">
                     @Html.DisplayFor(modelItem => item.Vl_PrecoCusto)
                 </td>
-                <td>
+                <td class="py-5">
                     @Html.DisplayFor(modelItem => item.Vl_PrecoVenda)
                 </td>
-                <td>
+                <td class="py-5">
                     @Html.DisplayFor(modelItem => item.Qt_Quantidade)
                 </td>
-                <td>
+                <td class="py-5">
                     @Html.DisplayFor(modelItem => item.Categoria.Ds_Categoria)
                 </td>
                 <td class="text-center">

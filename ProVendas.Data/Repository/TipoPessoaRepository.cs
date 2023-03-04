@@ -50,26 +50,7 @@ namespace ProVendas.Data.Repository
             {
                 conn.Close();
             }
-        }
-
-        public Task<TipoPessoaModel> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(TipoPessoaModel entity)
-        {
-            throw new NotImplementedException();
-        }
-        public Task AddAsync(TipoPessoaModel entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        }       
 
     }
 }

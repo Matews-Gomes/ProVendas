@@ -1,0 +1,54 @@
+﻿@model ProVendas.APP.Models.FilialViewModel
+
+@{
+    ViewData["Title"] = "Filial";
+}
+<h4><i class="fa-solid fa-shop"></i> Cadastrar @ViewData["Title"]</h4>
+
+<div class="d-flex justify-content-end">
+    <a class="btn btn-secondary" role="button" asp-action="Index">
+        <i class="fa-solid fa-arrow-left"></i>
+        Voltar para lista
+    </a>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" class="needs-validation" novalidate>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="Id_Filial" class="control-label fw-bold"></label>
+                    <select asp-for="Id_Filial" class="form-select"
+                            asp-items="@(new SelectList(ViewBag.Pessoas, "Id_Pessoa","Ds_Pessoa"))" required>
+                        <option value="">Selecione...</option>
+                    </select>
+                    <span asp-validation-for="Id_Filial" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Ds_Filial" class="control-label fw-bold"></label>
+                    <input asp-for="Ds_Filial" class="form-control" required />
+                    <span asp-validation-for="Ds_Filial" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Cm_Certificado" class="control-label fw-bold"></label>
+                    <input asp-for="Cm_Certificado" class="form-control" />
+                    <span asp-validation-for="Cm_Certificado" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Dt_Abertura" class="control-label fw-bold"></label>
+                    <input asp-for="Dt_Abertura" class="form-control" value="" />
+                    <span asp-validation-for="Dt_Abertura" class="text-danger"></span>
+                </div>
+                <button class="w-100 btn btn-success btn-lg" type="submit" value="Save">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

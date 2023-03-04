@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 
-namespace ProVendas.APP.Configurations
+namespace ProVendas.API.Configurations
 {
     public static class GlobalizationConfig
     {
@@ -18,6 +18,6 @@ namespace ProVendas.APP.Configurations
             app.UseRequestLocalization(localizationOptions);
 
             return app;
-        }
+        }       
     }
 }

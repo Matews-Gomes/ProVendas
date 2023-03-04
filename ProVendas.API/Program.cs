@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using ProVendas.API.Configurations;
-using ProVendas.APP.Configurations;
 using ProVendas.Data.DataContext;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DbDataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers();/*.AddJsonOptions(options  => {
+    options.JsonSerializerOptions.Converters.Add(new DateConverter());
+});*/
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

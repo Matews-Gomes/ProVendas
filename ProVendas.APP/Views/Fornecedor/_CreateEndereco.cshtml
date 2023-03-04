@@ -6,36 +6,40 @@
     <div class="col-md-12">  
         <div class="row g-3">
             <div class="col-md-4">
+                <label asp-for="Endereco.Ds_Cep" class="control-label fw-bold"></label>
+                <input asp-for="Endereco.Ds_Cep" id="cep" onblur="pesquisacep(this.value);" class="form-control" required />
+                <span asp-validation-for="Endereco.Ds_Cep" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
                 <label asp-for="Endereco.Ds_Logradouro" class="control-label fw-bold"></label>
-                <input asp-for="Endereco.Ds_Logradouro" class="form-control" required/>
+                <input asp-for="Endereco.Ds_Logradouro" id="rua" class="form-control" required />
                 <span asp-validation-for="Endereco.Ds_Logradouro" class="text-danger"></span>
             </div>
             <div class="col-md-4">
                 <label asp-for="Endereco.Ds_Numero" class="control-label fw-bold"></label>
-                <input asp-for="Endereco.Ds_Numero" class="form-control"  required/>
+                <input asp-for="Endereco.Ds_Numero" class="form-control" required />
                 <span asp-validation-for="Endereco.Ds_Numero" class="text-danger"></span>
             </div>
 
             <div class="col-md-4">
                 <label asp-for="Endereco.Ds_Bairro" class="control-label fw-bold"></label>
-                <input asp-for="Endereco.Ds_Bairro" class="form-control" required />
+                <input asp-for="Endereco.Ds_Bairro" id="bairro" class="form-control" required />
                 <span asp-validation-for="Endereco.Ds_Bairro" class="text-danger"></span>
             </div>
 
-            <div class="col-md-6">
-                <label asp-for="Endereco.Ds_Cep" class="control-label fw-bold"></label>
-                <input asp-for="Endereco.Ds_Cep" class="form-control" required />
-                <span asp-validation-for="Endereco.Ds_Cep" class="text-danger"></span>
+            <div class="col-md-4">
+                <label asp-for="Endereco.Cidade.Ds_Cidade" class="control-label fw-bold"></label>
+                <input asp-for="Endereco.Cidade.Ds_Cidade" id="cidade" class="form-control" id="cep" required />
+                <span asp-validation-for="Endereco.Cidade.Ds_Cidade" class="text-danger"></span>
             </div>
-                       
-            <div class="col-md-6">
-                <label asp-for="Endereco.Cidade.Id_Cidade" class="control-label fw-bold"></label>
-                <select asp-for="Endereco.Cidade.Id_Cidade" class="form-select"
-                        asp-items="@(new SelectList(ViewBag.cidades, "Id_Cidade","Ds_Cidade"))" required>
-                        <option value="">Selecione...</option>
-                </select>
-                <span asp-validation-for="Endereco.Cidade.Id_Cidade" class="text-danger"></span>
+
+            <div class="col-md-4">
+                <label asp-for="Endereco.Cidade.Estado.Cd_Estado" class="control-label fw-bold"></label>
+                <input asp-for="Endereco.Cidade.Estado.Cd_Estado" id="uf" class="form-control" id="cep" required />
+                <span asp-validation-for="Endereco.Cidade.Estado.Cd_Estado" class="text-danger"></span>
             </div>
+
             <div class="col-md-12">
                 <label asp-for="Endereco.Ds_Complemento" class="control-label fw-bold"></label>
                 <textarea asp-for="Endereco.Ds_Complemento" class="form-control"></textarea>

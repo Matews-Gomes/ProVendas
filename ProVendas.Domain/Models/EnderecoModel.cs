@@ -9,7 +9,6 @@
         public string Ds_Cep { get; set; }
         public string Ds_Bairro { get; set; }
         public int Id_PessoaEndereco { get; set; }
-        public EstadoModel Estado { get; set; }
         public CidadeModel Cidade { get; set; }
     }
 }

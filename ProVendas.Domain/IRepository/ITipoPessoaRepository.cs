@@ -2,5 +2,5 @@
 
 namespace ProVendas.Domain.IRepository
 {
-    public interface ITipoPessoaRepository : IGenericRepository<TipoPessoaModel>{ }
+    public interface ITipoPessoaRepository : IGenericListRepository<TipoPessoaModel>{ }
 }

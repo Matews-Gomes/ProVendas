@@ -36,8 +36,8 @@ namespace ProVendas.Data.Repository
                 {
                     estados.Add(new EstadoModel()
                     {
-                        Id_Estado = Convert.ToInt32(reader["Id_Estado"]),
-                        Ds_Estado = reader["Ds_Estado"].ToString().ToUpper()
+
+                        Cd_Estado = reader["Cd_Estado"].ToString().ToUpper()
                     });
                 }
 

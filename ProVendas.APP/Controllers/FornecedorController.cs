@@ -62,16 +62,15 @@ namespace ProVendas.APP.Controllers
             return View(fornecedor);
         }
 
-        public ActionResult Create()
+        public IActionResult Create()
         {
             var ListTipoPessoa = ObterTipoPessoa();
             ViewBag.tipoPessoa = ListTipoPessoa;
-            var ListCidades = ObterCidades();
-            ViewBag.cidades = ListCidades;
             return View(new FornecedorViewModel());
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(FornecedorViewModel entity)
         {
             try
@@ -94,8 +93,6 @@ namespace ProVendas.APP.Controllers
         {
             var ListTipoPessoa = ObterTipoPessoa();
             ViewBag.tipoPessoa = ListTipoPessoa;
-            var ListCidades = ObterCidades();
-            ViewBag.cidades = ListCidades;
 
             FornecedorViewModel fornecedor = new();
 
@@ -113,7 +110,6 @@ namespace ProVendas.APP.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                         $"Erro ao tentar recuperar registro. error: {ex.Message}");
             }
-
 
             return View(fornecedor);
         }
@@ -142,8 +138,6 @@ namespace ProVendas.APP.Controllers
         {
             var ListTipoPessoa = ObterTipoPessoa();
             ViewBag.tipoPessoa = ListTipoPessoa;
-            var ListCidades = ObterCidades();
-            ViewBag.cidades = ListCidades;
 
             FornecedorViewModel fornecedor = new();
 
@@ -205,47 +199,5 @@ namespace ProVendas.APP.Controllers
 
             return tipoPessoas;
         }
-
-        private IEnumerable<CidadeViewModel> ObterCidades()
-        {
-            List<CidadeViewModel> cidades = new();
-
-            try
-            {
-                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Cidade").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    cidades = JsonConvert.DeserializeObject<List<CidadeViewModel>>(data);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erro ao tentar recuperar registro. error: {ex.Message}");
-            }
-
-            return cidades;
-        }
-
-        /*private IEnumerable<EstadoViewModel> ObterEstados()
-        {
-            List<EstadoViewModel> estados = new();
-
-            try
-            {
-                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Estado").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    estados = JsonConvert.DeserializeObject<List<EstadoViewModel>>(data);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erro ao tentar recuperar registro. error: {ex.Message}");
-            }
-
-            return estados;
-        }*/
     }
 }

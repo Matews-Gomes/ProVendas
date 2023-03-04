@@ -4,7 +4,7 @@
     ViewData["Title"] = "Fornecedor";
 }
 
-<h4>Cadastrar @ViewData["Title"]</h4>
+<h4><i class="fa-solid fa-truck"></i> Cadastrar @ViewData["Title"]</h4>
 
 <div class="d-flex justify-content-end">
     <a class="btn btn-secondary" role="button" asp-action="Index">
@@ -18,12 +18,13 @@
     <div class="col-md-12">
         <form asp-action="Create" class="needs-validation" novalidate> 
             <div class="row g-3">
-                <div class="col-md-6">
-                    <label asp-for="Ds_Fornecedor" class="control-label fw-bold"></label>
-                    <input asp-for="Ds_Fornecedor" class="form-control" required />
-                    <span asp-validation-for="Ds_Fornecedor" class="text-danger"></span>
-                </div>
 
+                <div class="col-md-6">
+                    <label asp-for="PessoaDocumento.Ds_Pessoa" class="control-label fw-bold"></label>
+                    <input asp-for="PessoaDocumento.Ds_Pessoa" class="form-control" required />
+                    <span asp-validation-for="PessoaDocumento.Ds_Pessoa" class="text-danger"></span>
+                </div>
+                
                 <div class="col-md-6">
                     <label asp-for="TipoPessoa.Id_TipoPessoa" class="control-label fw-bold"></label>
                     <select asp-for="TipoPessoa.Id_TipoPessoa" class="form-select"

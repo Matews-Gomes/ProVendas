@@ -22,10 +22,11 @@
         <form asp-action="Edit"class="needs-validation" novalidate>
             <div class="row g-3">
                     <input asp-for="Id_Fornecedor" class="form-control" type="hidden" />
+
                 <div class="col-md-6">
-                    <label asp-for="Ds_Fornecedor" class="control-label fw-bold"></label>
-                    <input asp-for="Ds_Fornecedor" class="form-control" required/>
-                    <span asp-validation-for="Ds_Fornecedor" class="text-danger"></span>
+                    <label asp-for="PessoaDocumento.Ds_Pessoa" class="control-label fw-bold"></label>
+                    <input asp-for="PessoaDocumento" class="form-control" required />
+                    <span asp-validation-for="PessoaDocumento" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-6">
@@ -49,7 +50,7 @@
                     <span asp-validation-for="PessoaDocumento.Ds_InscricaoEstadual" class="text-danger"></span>
                 </div>
 
-                <div class="col-md-3 py-4">
+                <div class="col-md-12 py-4">
                     <input type="checkbox" class="form-check-input" asp-for="Tp_Cliente" value="true">
                     <label asp-for="Tp_Cliente" class="form-labe fw-bold"></label>
                 </div>

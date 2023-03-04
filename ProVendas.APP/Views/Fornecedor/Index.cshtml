@@ -20,13 +20,16 @@
     <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Ds_Fornecedor)
+                @Html.DisplayNameFor(model => model.PessoaDocumento.Ds_Pessoa)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TipoPessoa.Ds_TipoPessoa)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PessoaDocumento.Ds_Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contato.Ds_Telefone)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Contato.Ds_Celular)
@@ -46,6 +49,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PessoaDocumento.Ds_Documento)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contato.Ds_Telefone)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Contato.Ds_Celular)                                     
             </td>

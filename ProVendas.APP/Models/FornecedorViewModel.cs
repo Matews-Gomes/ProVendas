@@ -8,10 +8,6 @@ namespace ProVendas.APP.Models
         [Display(Name = "Fornecedor")]
         [Required(ErrorMessage = "O Campo {0}, é Obrigatório!")]
         public int Id_Fornecedor { get; set; }
-
-        [DisplayName("Fornecedor")]
-        [Required(ErrorMessage = "O Campo {0}, é Obrigatório!")]
-        [StringLength(200, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 6)]
         public string Ds_Fornecedor { get; set; }
 
         [Display(Name = "Marcar como Cliente ?")]

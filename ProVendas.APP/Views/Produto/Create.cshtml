@@ -4,7 +4,10 @@
     ViewData["Title"] = "Produto";
 }
 
-<h1>Cadastrar @ViewData["Title"]</h1>
+<h4 class="py-4">
+    <i class="fa-brands fa-product-hunt"></i>
+    Cadastrar @ViewData["Title"]
+</h4>
 
 <div class="d-flex justify-content-end">
     <a class="btn btn-secondary" role="button" asp-action="Index">
@@ -58,7 +61,7 @@
                 <div class="col-md-6">
                     <label asp-for="Fornecedor.Id_Fornecedor" class="control-label fw-bold"></label>
                     <select asp-for="Fornecedor.Id_Fornecedor" class="form-select"
-                            asp-items="@(new SelectList(ViewBag.fornecedores, "Id_Fornecedor","Ds_Fornecedor"))" required >
+                            asp-items="@(new SelectList(ViewBag.fornecedores, "Id_Fornecedor","Ds_Fornecedor"))" required>
                         <option value="">Selecione...</option>
                     </select>
                     <span asp-validation-for="Fornecedor.Id_Fornecedor" class="text-danger"></span>

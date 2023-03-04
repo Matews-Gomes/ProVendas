@@ -41,11 +41,17 @@ namespace ProVendas.Data.Repository
                         Ds_Imagem = reader["Ds_Imagem"].ToString().ToUpper(),                                                                      
                         Vl_PrecoCusto = Convert.ToDecimal(reader["Vl_PrecoCusto"]),
                         Vl_PrecoVenda = Convert.ToDecimal(reader["Vl_PrecoVenda"]),
+                        Qt_Quantidade = Convert.ToInt32(reader["Qt_Quantidade"]),
+
                         Fornecedor = new FornecedorModel()
                         {
-                            Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),
-                            Ds_Fornecedor = reader["Ds_Fornecedor"].ToString().ToUpper()
+                            Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),                            
+                            PessoaDocumento = new PessoaModel()
+                            {
+                                Ds_Pessoa = reader["Ds_Pessoa"].ToString().ToUpper()
+                            }
                         },
+
                         Categoria = new CategoriaModel()
                         {
                             Id_Categoria = Convert.ToInt32(reader["Id_Categoria"]),
@@ -91,11 +97,17 @@ namespace ProVendas.Data.Repository
                         Ds_Imagem = reader["Ds_Imagem"].ToString().ToUpper(),
                         Vl_PrecoCusto = Convert.ToDecimal(reader["Vl_PrecoCusto"]),
                         Vl_PrecoVenda = Convert.ToDecimal(reader["Vl_PrecoVenda"]),
+                        Qt_Quantidade = Convert.ToInt32(reader["Qt_Quantidade"]),
+
                         Fornecedor = new FornecedorModel()
                         {
                             Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),
-                            Ds_Fornecedor = reader["Ds_Fornecedor"].ToString().ToUpper()
-                        },
+                            PessoaDocumento = new PessoaModel()
+                            {
+                                Ds_Pessoa = reader["Ds_Pessoa"].ToString().ToUpper()
+                            },
+                        },                        
+
                         Categoria = new CategoriaModel()
                         {
                             Id_Categoria = Convert.ToInt32(reader["Id_Categoria"]),
@@ -131,11 +143,15 @@ namespace ProVendas.Data.Repository
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
 
+                var iFilial = 3;
+
+                cmd.Parameters.AddWithValue("@Id_Filial", iFilial);
                 cmd.Parameters.AddWithValue("@Ds_Produto", entity.Ds_Produto);
                 cmd.Parameters.AddWithValue("@Ds_Descricao", entity.Ds_Descricao);
                 cmd.Parameters.AddWithValue("@Ds_Imagem", entity.Ds_Imagem);
                 cmd.Parameters.AddWithValue("@Vl_PrecoCusto", entity.Vl_PrecoCusto);
                 cmd.Parameters.AddWithValue("@Vl_PrecoVenda", entity.Vl_PrecoVenda);
+                cmd.Parameters.AddWithValue("@Qtd_Produto", entity.Qt_Quantidade);
                 cmd.Parameters.AddWithValue("@Id_Fornecedor", entity.Fornecedor.Id_Fornecedor);
                 cmd.Parameters.AddWithValue("@Id_Categoria", entity.Categoria.Id_Categoria);
 

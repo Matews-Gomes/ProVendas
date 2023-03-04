@@ -51,14 +51,69 @@ namespace ProVendas.Data.Repository
             }
         }
 
-        public Task<CategoriaModel> GetByIdAsync(int id)
+        public async Task<CategoriaModel> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            CategoriaModel categoriaById = new();
+
+            using SqlConnection conn = new(Connection);
+            conn.Open();
+
+            try
+            {
+                SqlCommand cmd = new("SELECT * FROM VW_CATEGORIA WHERE ID_CATEGORIA = " + id, conn)
+                {
+                    CommandType = System.Data.CommandType.Text,
+                };
+
+                var reader = await cmd.ExecuteReaderAsync();
+                while (reader.Read())
+                {
+                    CategoriaModel categoria = new()
+                    {
+                        Id_Categoria = Convert.ToInt32(reader["Id_Categoria"]),
+                        Ds_Categoria = reader["Ds_Categoria"].ToString().ToUpper()
+                    };
+
+                    categoriaById = categoria;
+
+                }
+
+                return categoriaById;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao tentar recuperar registros: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
-        public Task AddAsync(CategoriaModel entity)
+        public async Task AddAsync(CategoriaModel entity)
         {
-            throw new NotImplementedException();
+            using SqlConnection conn = new(Connection);
+            conn.Open();
+
+            try
+            {
+                SqlCommand cmd = new("SP_CATEGORIA_INS", conn)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure,
+                };
+
+                cmd.Parameters.AddWithValue("@Ds_Categoria", entity.Ds_Categoria);
+
+                await cmd.ExecuteNonQueryAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao tentar adicionar registro: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public Task UpdateAsync(CategoriaModel entity)

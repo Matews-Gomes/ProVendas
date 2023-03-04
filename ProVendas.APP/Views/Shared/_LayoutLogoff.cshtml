@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProVendas.APP</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProVendas.APP.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dataTable.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/rowReorder.dataTables.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/responsive.dataTables.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/font-awesome/css/all.min.css"/>
+</head>
+<body>
+   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" asp-controller="Login" asp-action="Index">ProVendas.APP</a>           
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="d-flex justify-content-center">
+            &copy; @DateTime.Now.ToString("yyyy") - ProVendas.APP
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/popper.js/umd/popper.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/dataTables.min.js"></script>
+    <script src="~/js/dataTables.rowReorder.min.js"></script>
+    <script src="~/js/dataTables.responsive.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

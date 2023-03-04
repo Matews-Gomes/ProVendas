@@ -40,8 +40,9 @@ namespace ProVendas.Data.Repository
                             Ds_TipoPessoa = reader["Ds_TipoPessoa"].ToString().ToUpper()
                         },
 
-                        Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),
-                        Ds_Fornecedor = reader["Ds_Fornecedor"].ToString().ToUpper(),
+                        Id_Fornecedor = Convert.ToInt32(reader["Id_Pessoa"]),
+                        Ds_Fornecedor = reader["Ds_Pessoa"].ToString().ToUpper(),
+                        Tp_Cliente = Convert.ToBoolean(reader["Tp_Cliente"]),
 
                         PessoaDocumento = new PessoaModel()
                         {
@@ -98,11 +99,11 @@ namespace ProVendas.Data.Repository
                         },
 
                         Id_Fornecedor = Convert.ToInt32(reader["Id_Fornecedor"]),
-                        Ds_Fornecedor = reader["Ds_Fornecedor"].ToString().ToUpper(),
                         Tp_Cliente = Convert.ToBoolean(reader["Tp_Cliente"]),
 
                         PessoaDocumento = new PessoaModel()
                         {
+                            Ds_Pessoa = reader["Ds_Fornecedor"].ToString().ToUpper(),
                             Ds_Documento = reader["Ds_Documento"].ToString(),
                             Ds_InscricaoEstadual = reader["Ds_InscricaoEstadual"].ToString()
                         },
@@ -116,16 +117,13 @@ namespace ProVendas.Data.Repository
                             Ds_Cep = reader["Ds_Cep"].ToString(),
                             Cidade = new CidadeModel()
                             {
-                                Id_Cidade = Convert.ToInt32(reader["Id_Cidade"]),
-                                Ds_Cidade = reader["Ds_Cidade"].ToString().ToUpper()
-                            },
+                                Ds_Cidade = reader["Ds_Cidade"].ToString().ToUpper(),
 
-                            Estado = new EstadoModel()
-                            {
-                                Id_Estado = Convert.ToInt32(reader["Id_Estado"]),
-                                Ds_Estado = reader["Ds_Estado"].ToString().ToUpper(),
-                                Cd_Estado = reader["Cd_Estado"].ToString().ToUpper()
-                            }
+                                 Estado = new EstadoModel()
+                                 {
+                                     Cd_Estado = reader["Cd_Estado"].ToString().ToUpper()
+                                 }
+                            }                          
                         },
 
                         Contato = new ContatoModel()
@@ -164,7 +162,7 @@ namespace ProVendas.Data.Repository
                     CommandType = System.Data.CommandType.StoredProcedure,
                 };
 
-                cmd.Parameters.AddWithValue("@Ds_Fornecedor", entity.Ds_Fornecedor);
+                cmd.Parameters.AddWithValue("@Ds_Pessoa", entity.PessoaDocumento.Ds_Pessoa);
                 cmd.Parameters.AddWithValue("@Ds_Documento", entity.PessoaDocumento.Ds_Documento);
                 cmd.Parameters.AddWithValue("@Ds_InscricaoEstadual", entity.PessoaDocumento.Ds_InscricaoEstadual);
                 cmd.Parameters.AddWithValue("@Tp_Cliente", entity.Tp_Cliente);
@@ -174,7 +172,8 @@ namespace ProVendas.Data.Repository
                 cmd.Parameters.AddWithValue("@Ds_Complemento", entity.Endereco.Ds_Complemento);
                 cmd.Parameters.AddWithValue("@Ds_Bairro", entity.Endereco.Ds_Bairro);
                 cmd.Parameters.AddWithValue("@Ds_Cep", entity.Endereco.Ds_Cep);
-                cmd.Parameters.AddWithValue("@Id_Cidade", entity.Endereco.Cidade.Id_Cidade);
+                cmd.Parameters.AddWithValue("@Ds_Cidade", entity.Endereco.Cidade.Ds_Cidade);
+                cmd.Parameters.AddWithValue("@Cd_Estado", entity.Endereco.Cidade.Estado.Cd_Estado);
                 cmd.Parameters.AddWithValue("@Ds_Telefone", entity.Contato.Ds_Telefone);
                 cmd.Parameters.AddWithValue("@Ds_Celular", entity.Contato.Ds_Celular);
                 cmd.Parameters.AddWithValue("@Ds_Email", entity.Contato.Ds_Email);
@@ -205,7 +204,7 @@ namespace ProVendas.Data.Repository
                 };
 
                 cmd.Parameters.AddWithValue("@Id_Pessoa", entity.Id_Fornecedor);
-                cmd.Parameters.AddWithValue("@Ds_Fornecedor", entity.Ds_Fornecedor);
+                cmd.Parameters.AddWithValue("@Ds_Pessoa", entity.PessoaDocumento.Ds_Pessoa);
                 cmd.Parameters.AddWithValue("@Ds_Documento", entity.PessoaDocumento.Ds_Documento);
                 cmd.Parameters.AddWithValue("@Ds_InscricaoEstadual", entity.PessoaDocumento.Ds_InscricaoEstadual);
                 cmd.Parameters.AddWithValue("@Tp_Cliente", entity.Tp_Cliente);
@@ -215,7 +214,8 @@ namespace ProVendas.Data.Repository
                 cmd.Parameters.AddWithValue("@Ds_Complemento", entity.Endereco.Ds_Complemento);
                 cmd.Parameters.AddWithValue("@Ds_Bairro", entity.Endereco.Ds_Bairro);
                 cmd.Parameters.AddWithValue("@Ds_Cep", entity.Endereco.Ds_Cep);
-                cmd.Parameters.AddWithValue("@Id_Cidade", entity.Endereco.Cidade.Id_Cidade);
+                cmd.Parameters.AddWithValue("@Ds_Cidade", entity.Endereco.Cidade.Ds_Cidade);
+                cmd.Parameters.AddWithValue("@Cd_Estado", entity.Endereco.Cidade.Estado.Cd_Estado);
                 cmd.Parameters.AddWithValue("@Ds_Telefone", entity.Contato.Ds_Telefone);
                 cmd.Parameters.AddWithValue("@Ds_Celular", entity.Contato.Ds_Celular);
                 cmd.Parameters.AddWithValue("@Ds_Email", entity.Contato.Ds_Email);

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.Xml.Linq;
 
 namespace ProVendas.APP.Models
 {
@@ -9,11 +8,6 @@ namespace ProVendas.APP.Models
         [Display(Name = "Cliente")]
         [Required(ErrorMessage = "O Campo {0}, é Obrigatório!")]
         public int Id_Cliente { get; set; }
-
-        [DisplayName("Cliente")]
-        [Required(ErrorMessage = "O Campo {0}, é Obrigatório!")]
-        [StringLength(200, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 6)]
-        public string Ds_Cliente { get; set; }
 
         [Required(ErrorMessage = "O Campo {0}, é Obrigatório!")]
         [DataType(DataType.Currency)]

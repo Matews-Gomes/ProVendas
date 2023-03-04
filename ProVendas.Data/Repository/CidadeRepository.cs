@@ -34,7 +34,6 @@ namespace ProVendas.Data.Repository
                 {
                     cidades.Add(new CidadeModel()
                     {
-                        Id_Cidade = Convert.ToInt32(reader["Id_Cidade"]),
                         Ds_Cidade = reader["Ds_Cidade"].ToString().ToUpper()
                     });
                 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProVendas.Data.Repository;
 using ProVendas.Domain.IRepository;
+using ProVendas.Domain.Models;
 
 namespace ProVendas.API.Controllers
 {
@@ -31,14 +33,38 @@ namespace ProVendas.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            try
+            {
+                var categoriaById = await _categoriaRepository.GetByIdAsync(id);
+                if (categoriaById != null) return Ok(categoriaById);
+
+                return NotFound("Nenhum registro encontrado!");
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                                         $"Erro ao tentar recuperar registros. error: {ex.Message}");
+            }           
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post(CategoriaModel entity)
         {
+            try
+            {
+
+                if (entity != null) { await _categoriaRepository.AddAsync(entity); return Ok(entity); }
+
+                return BadRequest("Erro ao tentar salvar o registro");
+
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                        $"Erro ao tentar salvar registro. error: {ex.Message}");
+            }
         }
 
         [HttpPut("{id}")]

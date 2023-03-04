@@ -30,7 +30,6 @@ namespace ProVendas.APP.Models
         [Required(ErrorMessage = "O Campo {0}, é Obrigatório!")]
         public string Ds_Bairro { get; set; }
         public int Id_PessoaEndereco { get; set; }
-        public EstadoViewModel Estado { get; set; }
         public CidadeViewModel Cidade { get; set; }
     }
 }
